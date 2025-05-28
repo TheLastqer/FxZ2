@@ -1,5 +1,40 @@
  local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+local Tab = Window:CreateTab("Tab Example", 4483362458) -- Title, Image
+
+local Button = Tab:CreateButton({
+   Name = "Clicker",
+   Callback = function()
+   local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ClickMoney = ReplicatedStorage:FindFirstChild("Events") and ReplicatedStorage.Events:FindFirstChild("ClickMoney")
+local Upgrade = ReplicatedStorage:FindFirstChild("Events") and ReplicatedStorage.Events:FindFirstChild("Upgrade")
+
+while true do
+    if ClickMoney then
+        for i = 1, 100 do
+            ClickMoney:FireServer()
+        end
+    end
+
+    if Upgrade then
+        for upgradeId = 1, 10 do
+            Upgrade:FireServer(upgradeId, false)
+        end
+    end
+
+    task.wait(0.01) -- Much faster looping (100x faster than 1 second)
+end
+   end,
+})
+local Toggle = Tab:CreateToggle({
+   Name = "Toggle Example",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   -- The function that takes place when the toggle is pressed
+   -- The variable (Value) is a boolean on whether the toggle is true or false
+   end,
+})
 
 local Window = Rayfield:CreateWindow({
    Name = "FxZ Hub",
